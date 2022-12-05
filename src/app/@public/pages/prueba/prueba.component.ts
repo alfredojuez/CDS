@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-prueba',
@@ -6,28 +7,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prueba.component.scss'],
 })
 export class PruebaComponent implements OnInit {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getFilteredList();
-    document.getElementById("entrada").focus();
+    this.getData(); // Leemos el JSON
+    this.getFilteredList(); // Generamos los datos del combo
+    document.getElementById('entrada').focus(); //ponemos el foco
   }
 
-  listado = [
-    'carrot',
-    'banana',
-    'apple',
-    'potato',
-    'tomato',
-    'cabbage',
-    'turnip',
-    'okra',
-    'onion',
-    'cherries',
-    'plum',
-    'mango',
-  ];
+  // /**
+  //  * Leemos los datos de JSON proporcionado
+  //  * @returns
+  //  */
+  getData() {
+    console.log('Solicitada información de ciudades');
+    return new Promise((resolve, reject) => {
+      this.http.get('./assets/data/cities.json').subscribe(
+        (data) => {
+          this.listadoGeneral = data;
+          this.listado = [];
+          this.listadoGeneral.forEach((element) => {
+            this.listado.push(element.name);
+          });
+          resolve(true);
+        },
+        (error) => {
+          reject(true);
+        }
+      );
+    });
+  }
+
+  listado = [];
   textoDeInput = '';
+  listadoGeneral: any;
   listaFiltrada = [];
   listaSeleccion = [];
 
@@ -49,7 +62,7 @@ export class PruebaComponent implements OnInit {
 
   getFilteredList() {
     this.listaFiltrada = this.listado.filter((el) =>
-      el.startsWith(this.filtro)
+      el.toUpperCase().startsWith(this.filtro.toUpperCase())
     );
     this.listaFiltrada.sort();
 
