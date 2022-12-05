@@ -22,6 +22,6 @@ export class AppComponent {
 
   cerrarSesion() {
     localStorage.setItem('isLogged', '0');
-    this.router.navigate(['prueba']);
+    this.router.navigate(['login']);
   }
 }

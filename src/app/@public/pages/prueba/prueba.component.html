@@ -1,17 +1,50 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-12"><h3>Prueba con Ciudades y tiempos en API REST</h3></div>
+    <div class="col-lg-12">
+      <h3>Prueba con Ciudades y tiempos en API REST</h3>
+    </div>
     <div class="col-lg-6">
       <div class="titulo">Seleccione ciudades por nombre</div>
       <!-- //combo con el listado de ciudades -->
       <div class="container">
-        primero
+        <!-- Control personalizado Combo tipo typeahead -->
+        <div class="combobox">
+          <input
+            id="entrada"
+            [(ngModel)]="filtro"
+            (keyup)="gestionaTeclado($event)"
+            type="text"
+            class="combobox-input"
+            placeholder="Select one..."
+          />
+
+          <div class="combobox-options" *ngIf="!listHidden">
+            <div *ngFor="let item of getFilteredList(); let i = index">
+              <div
+                [ngClass]="{ selected: i === selectedIndex }"
+                (click)="seleccionaElemento(i)"
+              >
+                {{ item }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin Control personalizado Combo tipo typeahead -->
       </div>
     </div>
 
     <div class="col-lg-6">
       <div class="titulo">Selección de ciudades</div>
       <!-- //listbox con la selección de ciudades.... -->
+      <div *ngFor="let item of listaSeleccion">
+        <div (click)="eliminaElementoSeleccionado(item)">
+          [ x ] - {{ item }}
+        </div>
+      </div>
+      <br>
+      <div class="btn btn-primary form-control" *ngIf="listaSeleccion.length">BUSCAR INFORMACION</div>
+      <br><br>
     </div>
+
   </div>
 </div>
