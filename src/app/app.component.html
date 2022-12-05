@@ -3,18 +3,6 @@
   <div id="cabecera">MENU</div>
 
   <div id="menu">
-    <!-- <ul>
-      <li>
-        <a [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
-      </li>
-      <li>
-        <a [routerLink]="['/about']" routerLinkActive="router-link-active" >About</a>
-      </li>
-      <li>
-        <a [routerLink]="['/contact']" routerLinkActive="router-link-active" >Contact</a>
-      </li>
-    </ul> -->
-
     <ul class="row">
       <li class="col-2">
         <a [routerLink]="['/home']" routerLinkActive="router-link-active">Inicio</a>
@@ -23,7 +11,7 @@
         <a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
       </li>
       <li class="col-2" *ngIf="Validado()">
-        <a [routerLink]="['/contact']" routerLinkActive="router-link-active">Acerca de</a>
+        <a [routerLink]="['/prueba']" routerLinkActive="router-link-active">Tiempo/ciudades</a>
       </li>
       <li class="col-2" *ngIf="Validado()">
         <div (click)="cerrarSesion()">Cerrar sesion</div>

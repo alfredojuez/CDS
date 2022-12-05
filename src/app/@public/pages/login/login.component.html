@@ -56,6 +56,10 @@
           Iniciar sesión
         </button>
         <br /><br />
+        <div *ngIf="errorLogin" class="error">
+          *El usuario y contraseña proporcionado, no son correctos, por favor, intentelo de nuevo. Si no sabe el usuario o contraseña correctos, mire en la parte superior, porque están en negrita.
+        </div>
+        <br /><br />
       </form>
     </div>
     <div class="col-lg"></div>

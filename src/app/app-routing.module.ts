@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren:()=>import('./@public/pages/login/login.module').then(m=>m.LoginModule)
   },
   {
-    path:'contact', 
-    loadChildren:()=>import('./@public/pages/contact/contact.module').then(m=>m.ContactModule)
+    path:'prueba', 
+    loadChildren:()=>import('./@public/pages/prueba/prueba.module').then(m=>m.PruebaModule)
   },
   {
     path:'not-found', 
