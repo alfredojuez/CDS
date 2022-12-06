@@ -13,6 +13,7 @@
             id="entrada"
             [(ngModel)]="filtro"
             (keyup)="gestionaTeclado($event)"
+            (focus)="muestraListado()"
             type="text"
             class="combobox-input"
             placeholder="Select one..."
@@ -22,6 +23,7 @@
             <div *ngFor="let item of getFilteredList(); let i = index">
               <div
                 [ngClass]="{ selected: i === selectedIndex }"
+                (onKeyUp)="gestionaTeclado($event)"
                 (click)="seleccionaElemento(i)"
               >
                 {{ item }}
@@ -42,10 +44,39 @@
         </div>
       </div>
       <br />
-      <div class="btn btn-primary form-control" *ngIf="listaSeleccion.length">
+      <div
+        class="btn btn-primary form-control"
+        *ngIf="listaSeleccion.length"
+        (click)="solicitaInfoRestApi()"
+      >
         BUSCAR INFORMACION
       </div>
       <br /><br />
     </div>
+  </div>
+
+  <div class="container" *ngIf="verTiempo">
+    <h3>Estado del tiempo de lugares seleccionados</h3>
+
+    <table class="table">
+      <thead class="cabeceraTabla">
+        <tr>
+          <th scope="col" class="col-1">ICO</th>
+          <th scope="col" class="col-2">Ubicación</th>
+          <th scope="col" class="col-2">MIN ºC</th>
+          <th scope="col" class="col-2">MAX ºC</th>
+          <th scope="col">Descripcion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="" *ngFor="let elemento of listaTiempos">
+          <td><img height="25px" src="{{ dameURL(elemento.weather[0].icon) }}" /></td>
+          <th scope="row">{{ elemento.name }}</th>
+          <td>{{elemento.main.temp_min - 273  | number : '1.0-0'}}"</td>
+          <td>{{elemento.main.temp_max - 273  | number : '1.0-2'}}"</td>
+          <td>{{ elemento.weather[0].description }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

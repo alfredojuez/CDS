@@ -1,17 +1,15 @@
 <div class="combobox">
   <input
     type="text"
-    (ngModel)="inputItem"
+    (ngModel)="(inputItem)"
     (ngModelChange)="getFilteredList()"
     class="combobox-input"
-    
     (blur)="toggleListDisplay(0)"
     (focus)="toggleListDisplay(1)"
-    
     placeholder="Select one..."
     [ngClass]="{ error: showError }"
   />
-  
+
   <div class="combobox-options">
     <list-item
       *ngFor="let item of filteredList; let i = index"
@@ -21,6 +19,5 @@
       >{{ item }}</list-item
     >
   </div>
-
   <span *ngIf="showError" class="error-text"><i>Invalid Selection.</i></span>
 </div>
